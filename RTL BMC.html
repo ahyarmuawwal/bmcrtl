@@ -1,0 +1,314 @@
+html_content = """<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Rencana Tindak Lanjut (RTL) - UMKM Bakery</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #d35400;
+            --bg: #fdfbf7;
+            --box-bg: #ffffff;
+            --border: #e2e8f0;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--box-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+        }
+        h1 {
+            color: var(--primary);
+            margin: 0 0 10px 0;
+            font-size: 28px;
+        }
+        p.subtitle {
+            color: #64748b;
+            margin: 0;
+            font-size: 16px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(211, 84, 0, 0.1);
+        }
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .phase-card {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+        .phase-title {
+            color: var(--accent);
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .phase-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: var(--accent);
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid var(--border);
+        }
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            transition: transform 0.1s, opacity 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        .btn-pdf {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .btn-word {
+            background-color: #2980b9;
+            color: white;
+        }
+        
+        /* Print Styles for PDF Generation via Browser */
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; padding: 0; max-width: 100%; border-radius: 0; }
+            .controls { display: none; }
+            input, textarea { 
+                border: none; 
+                background: transparent; 
+                padding: 0; 
+                resize: none; 
+            }
+            .phase-card {
+                border: 1px solid #ccc;
+                break-inside: avoid;
+            }
+            /* Visual fix for inputs in print */
+            input[type="text"] { border-bottom: 1px dotted #ccc; border-radius: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="rtl-document">
+    <div class="header">
+        <h1>Rencana Tindak Lanjut (RTL)</h1>
+        <p class="subtitle">Pengembangan Usaha Toko Roti (Bakery)</p>
+    </div>
+
+    <div class="grid-2">
+        <div class="form-group">
+            <label>Nama UMKM / Merek Usaha</label>
+            <input type="text" placeholder="Contoh: Roti Gembong Nusantara" id="namaUsaha">
+        </div>
+        <div class="form-group">
+            <label>Nama Pemilik / Penanggung Jawab</label>
+            <input type="text" placeholder="Nama lengkap" id="namaPemilik">
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Tanggal Penyusunan</label>
+        <input type="text" placeholder="DD/MM/YYYY" id="tanggalBuat">
+    </div>
+
+    <!-- Fase 1 -->
+    <div class="phase-card">
+        <div class="phase-title">Bulan 1: Persiapan & Riset</div>
+        <div class="form-group">
+            <label>Aktivitas Utama (To-Do List)</label>
+            <textarea placeholder="1. Finalisasi resep standar dan SOP&#10;2. Survei dan negosiasi sewa lokasi&#10;3. Riset vendor peralatan"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Target Keluaran (Output / Indikator Selesai)</label>
+            <textarea placeholder="- Resep terkunci (lulus tes rasa)&#10;- Lokasi fisik didapatkan&#10;- Daftar dan harga peralatan rampung"></textarea>
+        </div>
+    </div>
+
+    <!-- Fase 2 -->
+    <div class="phase-card">
+        <div class="phase-title">Bulan 2: Legalitas & Suplai Bahan Baku</div>
+        <div class="form-group">
+            <label>Aktivitas Utama (To-Do List)</label>
+            <textarea placeholder="1. Mengurus izin usaha (NIB) via OSS & PIRT&#10;2. Mencari pemasok grosir&#10;3. Desain logo dan cetak kemasan"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Target Keluaran (Output / Indikator Selesai)</label>
+            <textarea placeholder="- NIB dan izin edar terbit&#10;- Kontrak harga agen selesai&#10;- Kemasan siap pakai"></textarea>
+        </div>
+    </div>
+
+    <!-- Fase 3 -->
+    <div class="phase-card">
+        <div class="phase-title">Bulan 3: Pra-Operasional & Digitalisasi</div>
+        <div class="form-group">
+            <label>Aktivitas Utama (To-Do List)</label>
+            <textarea placeholder="1. Rekrutmen baker dan kasir&#10;2. Pendaftaran akun e-business (GoFood/GrabFood/ShopeeFood)&#10;3. Setup aplikasi kasir (POS)"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Target Keluaran (Output / Indikator Selesai)</label>
+            <textarea placeholder="- Tim operasional siap&#10;- Akun merchant aktif&#10;- Sistem kasir siap digunakan"></textarea>
+        </div>
+    </div>
+
+    <!-- Fase 4 -->
+    <div class="phase-card">
+        <div class="phase-title">Bulan 4: Peluncuran & Pemasaran</div>
+        <div class="form-group">
+            <label>Aktivitas Utama (To-Do List)</label>
+            <textarea placeholder="1. Promosi Soft Opening di media sosial&#10;2. Distribusi tester ke instansi/komunitas sekitar&#10;3. Evaluasi HPP vs Harga Jual"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Target Keluaran (Output / Indikator Selesai)</label>
+            <textarea placeholder="- Toko beroperasi penuh&#10;- Target penjualan tercapai&#10;- Laporan arus kas awal stabil"></textarea>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn-pdf" onclick="cetakPDF()">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+            Simpan ke PDF
+        </button>
+        <button class="btn-word" onclick="exportWord('rtl-document', 'RTL_Toko_Roti')">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            Export ke Word
+        </button>
+    </div>
+</div>
+
+<script>
+    // Fungsi untuk PDF: Memanfaatkan fitur Print bawaan browser yang sangat rapi
+    function cetakPDF() {
+        window.print();
+    }
+
+    // Fungsi untuk Export ke Word
+    function exportWord(elementId, filename = '') {
+        var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title><style>body {font-family: Arial, sans-serif;} .phase-title {color: #d35400; font-size: 16pt; font-weight: bold; margin-bottom: 10px;} label {font-weight: bold; color: #2c3e50;} .val-box {border: 1px solid #ccc; padding: 10px; margin-bottom: 15px;}</style></head><body>";
+        var postHtml = "</body></html>";
+        
+        // Clone element agar tidak mengubah tampilan web asli
+        var clone = document.getElementById(elementId).cloneNode(true);
+        
+        // Buang tombol controls di hasil word
+        var controls = clone.querySelector('.controls');
+        if(controls) controls.remove();
+
+        // Ganti input dan textarea dengan div berisi value-nya agar bisa dibaca di Word
+        var inputs = document.getElementById(elementId).querySelectorAll('input, textarea');
+        var cloneInputs = clone.querySelectorAll('input, textarea');
+        
+        for (var i = 0; i < inputs.length; i++) {
+            var value = inputs[i].value || inputs[i].getAttribute('placeholder') || '';
+            // Ganti line break dengan tag <br> untuk Word
+            value = value.replace(/\\n/g, '<br>');
+            
+            var valDiv = document.createElement('div');
+            valDiv.className = 'val-box';
+            valDiv.innerHTML = value;
+            
+            cloneInputs[i].parentNode.replaceChild(valDiv, cloneInputs[i]);
+        }
+
+        var html = preHtml + clone.innerHTML + postHtml;
+
+        var blob = new Blob(['\\ufeff', html], {
+            type: 'application/msword'
+        });
+        
+        // Buat link download
+        var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+        filename = filename ? filename + '.doc' : 'document.doc';
+        
+        var downloadLink = document.createElement("a");
+        document.body.appendChild(downloadLink);
+        
+        if (navigator.msSaveOrOpenBlob) {
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            downloadLink.href = url;
+            downloadLink.download = filename;
+            downloadLink.click();
+        }
+        
+        document.body.removeChild(downloadLink);
+    }
+</script>
+
+</body>
+</html>
+"""
+
+with open('/mnt/data/Aplikasi_RTL_UMKM.html', 'w') as f:
+    f.write(html_content)
+
+print("File Aplikasi_RTL_UMKM.html successfully generated.")
